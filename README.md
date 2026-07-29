@@ -13,8 +13,6 @@
 
 <br>
 
-> ⚠️ **Nota de Portafolio:** Este repositorio sirve como **Landing Page / Showcase** de **Zaraz Studio 2.0 (Zaraz Maker)**. El motor de simulación subyacente (`zaraz-core`) y sus herramientas nativas están construidos bajo una arquitectura modular y agnóstica de alto rendimiento.
-
 ---
 
 ## 🌍 ¿Qué es Zaraz Studio?
