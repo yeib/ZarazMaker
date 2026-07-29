@@ -96,27 +96,6 @@ Suite completa de 12 inspectores especializados agrupados en 4 carpetas contened
 
 ---
 
-## 🚀 Cómo Ejecutar Zaraz Studio Localmente
-
-Si deseas compilar y ejecutar el estudio en tu equipo:
-
-### Requisitos Previos
-- **Rust** ($1.75+$) instalado vía [rustup.rs](https://rustup.rs/).
-- **Node.js** ($v18+$) y `npm`.
-- **Tauri CLI v2** (`npm install -g @tauri-apps/cli`).
-
-### Instrucciones
-```bash
-# 1. Clonar el repositorio
-git clone https://github.com/yeib/ZarazMaker.git
-cd ZarazMaker
-
-# 2. Iniciar el entorno en modo desarrollo
-npm run tauri dev
-```
-
----
-
 <div align="center">
   <p><i>Arquitectura No-Code diseñada con ❤️ en Rust, Tauri v2 y Vanilla Web Tech.</i></p>
   <p><b>Estado del Proyecto:</b> En Desarrollo Activo (Zaraz Studio 2.0 Ready).</p>
