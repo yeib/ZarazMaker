@@ -1,4 +1,5 @@
 <div align="center">
+  <img src="logozs.png" alt="Zaraz Studio Logo" width="120" style="margin-bottom:10px;">
   <h1>⚙️ Zaraz Studio 2.0 (Zaraz Maker)</h1>
   <p><strong>El Motor No-Code y Suite de Desarrollo Visual de Última Generación para Juegos de Simulación, Estrategia y RPG</strong></p>
 
