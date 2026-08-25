@@ -5,11 +5,13 @@
 
   <p>
     <img src="https://img.shields.io/badge/Core-Rust_100%25-orange.svg" alt="Rust 100%">
-    <img src="https://img.shields.io/badge/Runtime-Tauri_v2-blue.svg" alt="Tauri v2">
+    <img src="https://img.shields.io/badge/GPU_Render-WGPU_%2B_egui-blue.svg" alt="WGPU + egui">
+    <img src="https://img.shields.io/badge/Web-WebAssembly_(WASM)-yellow.svg" alt="WebAssembly">
+    <img src="https://img.shields.io/badge/Runtime-Tauri_v2-blueviolet.svg" alt="Tauri v2">
     <img src="https://img.shields.io/badge/Frontend-Vanilla_HTML5%2FCSS3%2FJS-brightgreen.svg" alt="Vanilla Web Tech">
+    <img src="https://img.shields.io/badge/Scripting-Rhai-critical.svg" alt="Rhai Scripting">
     <img src="https://img.shields.io/badge/AI_Engine-100%25_Offline_%26_Local-blueviolet.svg" alt="Offline AI Engine">
-    <img src="https://img.shields.io/badge/Engine-No--Code_System-purple.svg" alt="No-Code Engine">
-    <img src="https://img.shields.io/badge/Exporter-Standalone_.EXE-red.svg" alt="Standalone Exporter">
+    <img src="https://img.shields.io/badge/Exporter-Standalone_.EXE_%26_Web-red.svg" alt="Standalone Exporter">
   </p>
 </div>
 
@@ -59,31 +61,75 @@ Los modelos de texto operan bajo un motor de **Gramáticas y Logit Processors** 
 
 ---
 
-## 🛠️ Stack Tecnológico & Arquitectura
+## 🛠️ Stack Tecnológico & Arquitectura del Ecosistema
 
-**Zaraz Studio** está construido combinando el rendimiento nativo de bajo nivel de **Rust** con la flexibilidad de diseño de las tecnologías Web modernas.
+**Zaraz Studio** está construido sobre una arquitectura modular desacoplada que une la máxima velocidad de ejecución de **Rust**, la aceleración gráfica multiplataforma de **WGPU + egui**, la portabilidad de **WebAssembly** y la ergonomía del **desarrollo No-Code**.
 
 ```mermaid
 graph TD
-    A["🎨 Frontend IDE (HTML5 / Vanilla CSS3 / ES6+)"] -->|IPC Async| B["⚡ Tauri v2 Runtime (Rust Native)"]
-    B -->|Inferencia Local $0| F["🧠 Zaraz AI Engine (LLM + Difusión)"]
-    B -->|Persistencia Data-Driven| C["📁 Manifests JSON / GeoJSON / Assets"]
-    C -->|Simulación Multi-hilo| D["⚙️ Zaraz Core (Rust Engine)"]
-    D -->|Build 1-Clic| E["📦 Standalone Executable (.EXE)"]
+    subgraph IDE ["🖥️ Entorno Visual No-Code (tools/zaraz-studio)"]
+        UI["🎨 Frontend Vanilla (HTML5 / CSS3 / ES6+)"] -->|IPC Async| Tauri["⚡ Tauri v2 Runtime (Rust)"]
+        Tauri --> AI["🤖 Zaraz AI Engine (Candle LLM & SD 1.5)"]
+    end
+
+    subgraph Data ["📁 Capa Data-Driven (Proyectos & Manifiestos)"]
+        Manifests["📜 Manifests JSON / GeoJSON / Assets 2D"]
+    end
+
+    subgraph Core ["⚙️ Simulación & Backend (engine/zaraz-core)"]
+        Tokio["⚡ Concurrencia Tokio Multi-hilo"]
+        Rhai["📜 Scripting Rhai (Lógica & Eventos)"]
+        Sim["🧠 POPs, Ledger & Utility AI"]
+    end
+
+    subgraph Render ["🎮 Runtime Gráfico & Exportación"]
+        WGPU["🚀 zaraz-render (WGPU 0.19 + egui 0.27)"]
+        WASM["🌐 zaraz-wasm-map (WebAssembly / WebGL)"]
+        Standalone["📦 Standalone Executable (.EXE / Linux / Web)"]
+    end
+
+    Tauri --> Manifests
+    Manifests --> Core
+    Core --> WGPU
+    Core --> WASM
+    WGPU --> Standalone
+    WASM --> Standalone
 ```
 
-### ⚙️ Backend Core (`zaraz-core`) — Rust 100%
+---
+
+### ⚙️ 1. Núcleo de Simulación (`engine/zaraz-core`) — Rust 100%
 - **Lenguaje Principal:** **Rust** (Garantía de Memory Safety, cero condiciones de carrera y concurrencia pura).
+- **Concurrencia Asíncrona:** Arquitectura multi-hilo construida sobre **Tokio** para procesar millones de transacciones y cálculos demográficos sin bloquear el renderizado.
+- **Motor de Scripting Integrado (`Rhai 1.19`):** Lenguaje de scripting seguro y embebible para evaluar condiciones lógicas, disparadores de eventos y fórmulas matemáticas sin requerir recompilación del binario.
 - **Indexación Espacial Masiva:** Algoritmos de **Quadtrees 2D** para detección de colisiones y selección en mapas vectoriales gigantescos.
 - **Rutas & Pathfinding A\*:** Algoritmos de caminos mínimos en grafos dinámicos (`zaraz-core::pathfinding`) integrados con costos de terreno y throttling de rendimiento.
 - **Matemática Vectorial:** Cálculo de geometrías y proyecciones usando `glam`.
-- **Inteligencia Artificial (Utility AI):** Evaluadores de utilidad (`AgentBrain`) basados en curvas de consideración (lineal, cuadrática, sigmoide) para decisiones autónomas de NPCs y entidades en juego.
+- **Inteligencia Artificial (Utility AI):** Evaluadores de utilidad (`AgentBrain`) basados en curvas de consideración (lineal, cuadrática, sigmoide) para decisiones autónomas de NPCs y facciones.
 - **Motor de Tiempo Universal:** Sistema de reloj multiescala (`zaraz-core::time`) con escalas horarias, diarias e intervalos por Ticks.
 - **Bus de Eventos Desacoplado:** Bus de comunicación Pub/Sub (`EventBus`) para desacoplar subsistemas de simulación en múltiples hilos.
 - **Sistema de Partida Doble:** Contabilidad financiera (`Ledger`) con seguimiento de flujos de caja, saldos y control de deuda.
 - **Sistema "Modo Patata" (`zaraz_core::performance`):** Control fino de rendimiento de simulación y gráficos (`Potato`, `Standard`, `Ultra`) con límites de FPS (30–144 FPS), VSync, MSAA y throttling dinámico de IA/Pathfinding para garantizar fluidez en cualquier hardware.
 
-### 🖥️ Runtime & Frontend IDE
+---
+
+### 🎮 2. Motor Gráfico & Render GPU (`engine/zaraz-render`)
+- **Pipeline Gráfico Universal:** Desarrollado sobre **WGPU 0.19**, proporcionando abstracción nativa de bajo nivel sobre **Vulkan, DirectX 12, Metal, OpenGL y WebGL**.
+- **Live DevTools & Inspector con `egui` (0.27):** Interfaz gráfica inmediata integrada (`egui-wgpu` + `egui-winit`) para el *Zaraz Live Inspector*, permitiendo telemetría en tiempo real a 60 FPS, inspección de eventos del `EventBus`, control del reloj de simulación y depuración en caliente.
+- **Renderizado Vectorial & SVG:** Pipeline de triangulación de polígonos y mallas vectoriales acelerado con **Lyon (1.0)** y parser de estructuras SVG mediante **Roxmltree (0.20)**.
+- **Shaders WGSL Optimizados:** Shaders dedicados (`map.wgsl`, `sprite.wgsl`) para renderizado eficiente de mapas cartográficos por capas y sprites con iluminación 2D.
+- **Gestión de Ventanas & Eventos:** Soporte multiplataforma fluido mediante **Winit (0.29)**.
+
+---
+
+### 🌐 3. Target WebAssembly & Navegador (`engine/zaraz-wasm-map`)
+- **Compilación WASM Nativa:** Crate configurado con `crate-type = ["cdylib", "rlib"]` optimizado para la arquitectura `wasm32-unknown-unknown`.
+- **Puente Web/JS de Alto Rendimiento:** Integración completa con **`wasm-bindgen`**, **`web-sys`** y **`wasm-bindgen-futures`** para comunicación bidireccional directa con el DOM y el canvas HTML5.
+- **Render WebGL con `wgpu` & `egui`:** Ejecución fluida de simulaciones, mapas tácticos y visualizadores interactivos directamente en el navegador sin complementos adicionales.
+
+---
+
+### 🖥️ 4. Runtime del IDE Visual (`tools/zaraz-studio`)
 - **Desktop Runtime:** **Tauri v2**, ofreciendo una huella de memoria ultraliviana (menor a 50 MB de RAM en reposo) e integración IPC nativa a máxima velocidad.
 - **Frontend No-Code:** Vanilla HTML5, JavaScript Moderno modular y Vanilla CSS3 estilizado (Dark Mode de alta fidelidad, Glassmorphism y micro-animaciones sin dependencias pesadas de frameworks).
 - **Visual Scripting & Diagramas:** Cables **SVG Bezier Splines** dinámicos para conectar nodos en árboles tecnológicos y grafos narrativos.
@@ -99,7 +145,7 @@ El estudio ofrece dos vistas de trabajo adaptadas al perfil del creador:
 Diseñado para la máxima velocidad de prototipado sin sobrecarga mental:
 1. 🗺️ **Paso 1: Dibuja tu Mundo & Mapa** (Importación de fondos PNG/JPG y trazado de regiones).
 2. 👤 **Paso 2: Crea tus Personajes & Héroes** (Diseño de personajes con retratos visuales y atributos).
-3. 📦 **Paso 3: Exporta tu Juego (.EXE)** (Compilación nativa en 1 solo clic).
+3. 📦 **Paso 3: Exporta tu Juego (.EXE / Web)** (Compilación y empaquetado en 1 solo clic).
 
 ---
 
@@ -124,12 +170,12 @@ Suite completa de inspectores especializados organizados en categorías modulare
 * **Inspector de Variables & Atributos Custom:** Declarador no-code de variables (`Global`, `Personaje`, `POPs`, `Región`) con probador interactivo en vivo.
 * **Diseñador No-Code de Misiones & Contratos:** Editor visual de misiones narrativas, acuerdos comerciales, pactos diplomáticos y contratos con cláusulas numéricas, plazos en ticks y botón `🪄 Generar Misión` asistido por IA (`contracts_manifest.json`).
 
-#### 📦 Compilación & Publicación Standalone
-* **Compilador & Exportador Standalone (.EXE):** Realiza una auditoría automática de integridad pre-flight (revisión de mapas, assets, economía y eventos) y empaqueta en 1 solo clic todos los datos JSON junto al binario ejecutable de distribución.
+#### 📦 Compilación & Publicación Multiplataforma
+* **Compilador & Exportador Standalone (.EXE / Web):** Realiza una auditoría automática de integridad pre-flight (revisión de mapas, assets, economía y eventos) y empaqueta en 1 solo clic todos los datos JSON junto al binario ejecutable de distribución.
 
 ---
 
 <div align="center">
-  <p><i>Arquitectura No-Code diseñada con ❤️ en Rust, Tauri v2 y Vanilla Web Tech.</i></p>
+  <p><i>Arquitectura No-Code diseñada con ❤️ en Rust, Tauri v2, WGPU, egui, WebAssembly y Vanilla Web Tech.</i></p>
   <p><b>Estado del Proyecto:</b> En Desarrollo Activo (Zaraz Studio 2.0 Ready · IA Local Integrada).</p>
 </div>
