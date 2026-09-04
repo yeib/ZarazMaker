@@ -170,6 +170,16 @@ Suite completa de inspectores especializados organizados en categorías modulare
 * **Inspector de Variables & Atributos Custom:** Declarador no-code de variables (`Global`, `Personaje`, `POPs`, `Región`) con probador interactivo en vivo.
 * **Diseñador No-Code de Misiones & Contratos:** Editor visual de misiones narrativas, acuerdos comerciales, pactos diplomáticos y contratos con cláusulas numéricas, plazos en ticks y botón `🪄 Generar Misión` asistido por IA (`contracts_manifest.json`).
 
+#### 🗄️ Base de Datos & Constructor Ontológico (Universos a Medida)
+* **Constructor Visual de Ontologías:** Crea o importa la cosmología de tu mundo (Razas, Facciones, Elementos, Magias, Clases) con un solo clic mediante **Packs Oficiales** (Fantasía, Ciencia Ficción, Histórico o Lienzo en Blanco) sin tocar código JSON.
+
+#### ⚔️ Combate Táctico & Banco de Pruebas Sandbox
+* **Simulador Táctico en Grilla:** Motor de batallas por turnos con grilla isométrica, modificadores de cobertura, cálculo de iniciativa, costes de energía (AP/MP) y resolución matemática de daño.
+* **Integración de Armería & Grimorio:** Gestor visual de armamento, ítems y árboles de habilidades tácticas (`items_manifest.json` y `skills_manifest.json`) validado dinámicamente en el banco de pruebas de combate.
+
+#### 💥 Efectos Visuales & Partículas GPU
+* **Diseñador de Partículas Reactivas:** Emisores configurables a 60 FPS (fuego, lluvia, humo, auras arcanas y bengalas) con mezcla aditiva y renderizado GPU ligero.
+
 #### 📦 Compilación & Publicación Multiplataforma
 * **Compilador & Exportador Standalone (.EXE / Web):** Realiza una auditoría automática de integridad pre-flight (revisión de mapas, assets, economía y eventos) y empaqueta en 1 solo clic todos los datos JSON junto al binario ejecutable de distribución.
 
